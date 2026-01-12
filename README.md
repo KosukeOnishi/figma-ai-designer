@@ -114,6 +114,45 @@ You: "Create a login form"
 
 ---
 
+## Tips: Using Material Icons
+
+You can use [Material Symbols](https://fonts.google.com/icons) in your designs!
+
+**1. Download & Install the font**
+- Go to [Google Fonts - Icons](https://fonts.google.com/icons)
+- Click any icon → Download → Install `MaterialSymbolsOutlined-Regular.ttf`
+- Restart Figma
+
+**2. Use icons with code points**
+
+Each icon has a "code point" (e.g., `e8b6` for search). Use it like this:
+
+```html
+<span style="font-family: 'Material Symbols Outlined'; font-size: 24px;">&#xe8b6;</span>
+```
+
+**Example: Search bar with icon**
+```html
+<div style="display: flex; align-items: center; gap: 12px; padding: 12px 16px; background: #f5f5f5; border-radius: 8px;">
+  <span style="font-family: 'Material Symbols Outlined'; font-size: 24px; color: #666;">&#xe8b6;</span>
+  <span style="color: #999;">Search...</span>
+</div>
+```
+
+**Common icon code points:**
+| Icon | Code | Usage |
+|------|------|-------|
+| search | `e8b6` | `&#xe8b6;` |
+| home | `e88a` | `&#xe88a;` |
+| settings | `e8b8` | `&#xe8b8;` |
+| person | `e7fd` | `&#xe7fd;` |
+| favorite | `e87d` | `&#xe87d;` |
+| notifications | `e7f4` | `&#xe7f4;` |
+| shopping_cart | `e8cc` | `&#xe8cc;` |
+| close | `e5cd` | `&#xe5cd;` |
+
+---
+
 ## Supported HTML & CSS
 
 ### HTML Elements
