@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Test 06: flex-grow</title>
+  <style>
+    body { display: flex; justify-content: center; padding: 40px; background: #e0e0e0; }
+  </style>
+</head>
+<body>
+
+<!--
+  Test: flex-grow distribution
+  Expected (CSS): flex:1 gets 1 part, flex:2 gets 2 parts of remaining space
+  Known limitation: Figma only supports layoutGrow 0 or 1, so flex:2 behaves same as flex:1
+-->
+<div style="width: 400px; display: flex; gap: 10px; background-color: #333; padding: 10px;">
+  <div style="flex: 1; height: 50px; background-color: #4a90d9;"></div>
+  <div style="flex: 2; height: 50px; background-color: #d94a4a;"></div>
+  <div style="width: 60px; height: 50px; background-color: #4ad94a;"></div>
+</div>
+
+</body>
+</html>

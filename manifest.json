@@ -1,0 +1,19 @@
+{
+  "name": "figma-ai-designer",
+  "id": "1592071865352736129",
+  "api": "1.0.0",
+  "main": "dist/plugin/code.js",
+  "ui": "plugin/ui.html",
+  "capabilities": [],
+  "enableProposedApi": false,
+  "documentAccess": "dynamic-page",
+  "editorType": [
+    "figma"
+  ],
+  "networkAccess": {
+    "allowedDomains": [
+      "*"
+    ],
+    "reasoning": "Connects to local MCP server via WebSocket for AI-powered design creation"
+  }
+}

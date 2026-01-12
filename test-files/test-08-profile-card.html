@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Test 08: Profile Card - Complex Layout</title>
+  <style>
+    body { display: flex; justify-content: center; padding: 40px; background: #e0e0e0; }
+  </style>
+</head>
+<body>
+
+<div style="width: 360px; background-color: #ffffff; border-radius: 16px; padding: 24px; display: flex; flex-direction: column; gap: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
+
+  <!-- Header with avatar and name -->
+  <div style="display: flex; gap: 16px; align-items: center;">
+    <div style="width: 64px; height: 64px; border-radius: 32px; background-color: #6366f1;"></div>
+    <div style="display: flex; flex-direction: column; gap: 4px;">
+      <span style="font-size: 20px; font-weight: bold; color: #1f2937;">Sarah Johnson</span>
+      <span style="font-size: 14px; color: #6b7280; font-style: italic;">Senior Designer</span>
+    </div>
+  </div>
+
+  <!-- Bio section -->
+  <div style="display: flex; flex-direction: column; gap: 8px;">
+    <span style="font-size: 12px; font-weight: 600; color: #9ca3af; letter-spacing: 1px;">ABOUT</span>
+    <span style="font-size: 14px; color: #4b5563; line-height: 22px;">Creative designer with 8+ years of experience in UI/UX. Passionate about creating beautiful and functional interfaces.</span>
+  </div>
+
+  <!-- Stats row -->
+  <div style="display: flex; justify-content: space-between; padding: 16px; background-color: #f9fafb; border-radius: 12px;">
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 4px;">
+      <span style="font-size: 24px; font-weight: bold; color: #6366f1;">142</span>
+      <span style="font-size: 12px; color: #6b7280;">Projects</span>
+    </div>
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 4px;">
+      <span style="font-size: 24px; font-weight: bold; color: #6366f1;">12K</span>
+      <span style="font-size: 12px; color: #6b7280;">Followers</span>
+    </div>
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 4px;">
+      <span style="font-size: 24px; font-weight: bold; color: #6366f1;">98%</span>
+      <span style="font-size: 12px; color: #6b7280;">Rating</span>
+    </div>
+  </div>
+
+  <!-- Skills tags -->
+  <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+    <span style="padding: 6px 12px; background-color: #eef2ff; color: #6366f1; font-size: 12px; font-weight: 500; border-radius: 16px;">UI Design</span>
+    <span style="padding: 6px 12px; background-color: #ecfdf5; color: #10b981; font-size: 12px; font-weight: 500; border-radius: 16px;">Figma</span>
+    <span style="padding: 6px 12px; background-color: #fef3c7; color: #f59e0b; font-size: 12px; font-weight: 500; border-radius: 16px;">Prototyping</span>
+    <span style="padding: 6px 12px; background-color: #fee2e2; color: #ef4444; font-size: 12px; font-weight: 500; border-radius: 16px;">Branding</span>
+  </div>
+
+  <!-- Action buttons -->
+  <div style="display: flex; gap: 12px;">
+    <div style="flex: 1; padding: 12px; background-color: #6366f1; border-radius: 8px; text-align: center;">
+      <span style="font-size: 14px; font-weight: 600; color: #ffffff;">Follow</span>
+    </div>
+    <div style="flex: 1; padding: 12px; background-color: #f3f4f6; border-radius: 8px; text-align: center;">
+      <span style="font-size: 14px; font-weight: 600; color: #4b5563;">Message</span>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

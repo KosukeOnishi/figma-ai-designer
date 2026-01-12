@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=375, initial-scale=1.0">
+  <title>Swipe Fashion App</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #e0e0e0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+  </style>
+</head>
+<body>
+
+<div style="width: 375px; height: 812px; background-color: #fafafa; position: relative; overflow: hidden;">
+
+  <!-- Header -->
+  <div style="display: flex; justify-content: space-between; align-items: center; padding: 48px 24px 16px 24px;">
+    <div style="width: 40px; height: 40px; background-color: #ffffff; border-radius: 12px; display: flex; justify-content: center; align-items: center; box-shadow: 0 2px 8px rgba(0,0,0,0.06);">
+      <span style="font-size: 20px;">☰</span>
+    </div>
+    <div style="display: flex; flex-direction: column; align-items: center;">
+      <span style="font-size: 12px; color: #888888; letter-spacing: 2px;">DISCOVER</span>
+      <span style="font-size: 18px; font-weight: 700; color: #1a1a1a;">New Arrivals</span>
+    </div>
+    <div style="width: 40px; height: 40px; background-color: #ffffff; border-radius: 12px; display: flex; justify-content: center; align-items: center; box-shadow: 0 2px 8px rgba(0,0,0,0.06);">
+      <span style="font-size: 18px;">🔔</span>
+    </div>
+  </div>
+
+  <!-- Main Card -->
+  <div style="margin: 0 20px; background-color: #ffffff; border-radius: 24px; overflow: hidden; box-shadow: 0 8px 32px rgba(0,0,0,0.12);">
+
+    <!-- Product Image -->
+    <div style="height: 360px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; justify-content: center; align-items: center; position: relative;">
+      <span style="font-size: 80px; opacity: 0.3;">👔</span>
+
+      <!-- NEW Badge -->
+      <div style="position: absolute; top: 20px; left: 20px; background-color: #1a1a1a; padding: 6px 12px; border-radius: 6px;">
+        <span style="font-size: 10px; font-weight: 700; color: #ffffff; letter-spacing: 1px;">NEW</span>
+      </div>
+
+      <!-- Like Count -->
+      <div style="position: absolute; top: 20px; right: 20px; background-color: rgba(255,255,255,0.95); padding: 8px 14px; border-radius: 20px; display: flex; align-items: center; gap: 6px;">
+        <span style="font-size: 14px;">❤️</span>
+        <span style="font-size: 12px; font-weight: 600; color: #1a1a1a;">234</span>
+      </div>
+    </div>
+
+    <!-- Product Info -->
+    <div style="padding: 20px 24px;">
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+        <div style="display: flex; flex-direction: column; gap: 4px;">
+          <span style="font-size: 11px; color: #888888; letter-spacing: 1px;">PREMIUM</span>
+          <span style="font-size: 20px; font-weight: 700; color: #1a1a1a;">Oversized Blazer</span>
+        </div>
+        <div style="display: flex; flex-direction: column; align-items: flex-end;">
+          <span style="font-size: 20px; font-weight: 700; color: #1a1a1a;">$189</span>
+          <span style="font-size: 12px; color: #888888; text-decoration: line-through;">$249</span>
+        </div>
+      </div>
+
+      <!-- Sizes -->
+      <div style="display: flex; gap: 8px; margin-top: 12px;">
+        <div style="width: 36px; height: 36px; background-color: #f5f5f5; border-radius: 8px; display: flex; justify-content: center; align-items: center; cursor: pointer;">
+          <span style="font-size: 12px; font-weight: 600; color: #888888;">XS</span>
+        </div>
+        <div style="width: 36px; height: 36px; background-color: #f5f5f5; border-radius: 8px; display: flex; justify-content: center; align-items: center; cursor: pointer;">
+          <span style="font-size: 12px; font-weight: 600; color: #888888;">S</span>
+        </div>
+        <div style="width: 36px; height: 36px; background-color: #1a1a1a; border-radius: 8px; display: flex; justify-content: center; align-items: center; cursor: pointer;">
+          <span style="font-size: 12px; font-weight: 600; color: #ffffff;">M</span>
+        </div>
+        <div style="width: 36px; height: 36px; background-color: #f5f5f5; border-radius: 8px; display: flex; justify-content: center; align-items: center; cursor: pointer;">
+          <span style="font-size: 12px; font-weight: 600; color: #888888;">L</span>
+        </div>
+        <div style="width: 36px; height: 36px; background-color: #f5f5f5; border-radius: 8px; display: flex; justify-content: center; align-items: center; cursor: pointer;">
+          <span style="font-size: 12px; font-weight: 600; color: #888888;">XL</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Action Buttons -->
+  <div style="display: flex; justify-content: center; align-items: center; gap: 20px; padding: 28px 20px;">
+    <div style="width: 56px; height: 56px; background-color: #ffffff; border-radius: 50%; display: flex; justify-content: center; align-items: center; box-shadow: 0 4px 16px rgba(0,0,0,0.08); cursor: pointer; transition: transform 0.2s;">
+      <span style="font-size: 24px;">✕</span>
+    </div>
+    <div style="width: 72px; height: 72px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 50%; display: flex; justify-content: center; align-items: center; box-shadow: 0 8px 24px rgba(102,126,234,0.4); cursor: pointer; transition: transform 0.2s;">
+      <span style="font-size: 28px;">🛒</span>
+    </div>
+    <div style="width: 56px; height: 56px; background-color: #ffffff; border-radius: 50%; display: flex; justify-content: center; align-items: center; box-shadow: 0 4px 16px rgba(0,0,0,0.08); cursor: pointer; transition: transform 0.2s;">
+      <span style="font-size: 24px;">❤️</span>
+    </div>
+  </div>
+
+  <!-- Bottom Nav -->
+  <div style="position: absolute; bottom: 0; left: 0; right: 0; display: flex; justify-content: space-around; align-items: center; padding: 16px 32px 32px 32px; background-color: #ffffff;">
+    <span style="font-size: 22px; cursor: pointer;">🏠</span>
+    <span style="font-size: 22px; opacity: 0.4; cursor: pointer;">🔍</span>
+    <span style="font-size: 22px; opacity: 0.4; cursor: pointer;">❤️</span>
+    <span style="font-size: 22px; opacity: 0.4; cursor: pointer;">👤</span>
+  </div>
+
+</div>
+
+</body>
+</html>

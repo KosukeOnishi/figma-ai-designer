@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Analytics Dashboard</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+  </style>
+</head>
+<body>
+<div style="width: 1440px; height: 900px; background-color: #f1f5f9; display: flex; font-family: Inter;">
+
+  <!-- Sidebar -->
+  <div style="width: 260px; background-color: #1e293b; display: flex; flex-direction: column; padding: 24px 16px;">
+    <!-- Logo -->
+    <div style="display: flex; align-items: center; gap: 12px; padding: 0 8px 24px 8px; border-bottom: 1px solid #334155;">
+      <div style="width: 36px; height: 36px; background-color: #3b82f6; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+        <span style="font-size: 18px; color: #ffffff; font-weight: 700;">A</span>
+      </div>
+      <span style="font-size: 18px; font-weight: 600; color: #ffffff;">Analytics Pro</span>
+    </div>
+
+    <!-- Nav Items -->
+    <div style="display: flex; flex-direction: column; gap: 4px; padding: 24px 0;">
+      <div style="display: flex; align-items: center; gap: 12px; padding: 12px; background-color: #3b82f6; border-radius: 8px;">
+        <span style="font-size: 18px;">📊</span>
+        <span style="font-size: 14px; font-weight: 500; color: #ffffff;">Dashboard</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 12px; padding: 12px; border-radius: 8px;">
+        <span style="font-size: 18px;">📈</span>
+        <span style="font-size: 14px; color: #94a3b8;">Analytics</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 12px; padding: 12px; border-radius: 8px;">
+        <span style="font-size: 18px;">👥</span>
+        <span style="font-size: 14px; color: #94a3b8;">Users</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 12px; padding: 12px; border-radius: 8px;">
+        <span style="font-size: 18px;">📁</span>
+        <span style="font-size: 14px; color: #94a3b8;">Projects</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 12px; padding: 12px; border-radius: 8px;">
+        <span style="font-size: 18px;">⚙️</span>
+        <span style="font-size: 14px; color: #94a3b8;">Settings</span>
+      </div>
+    </div>
+
+    <!-- Bottom User -->
+    <div style="margin-top: auto; display: flex; align-items: center; gap: 12px; padding: 16px 8px; border-top: 1px solid #334155;">
+      <div style="width: 40px; height: 40px; background-color: #64748b; border-radius: 20px; display: flex; align-items: center; justify-content: center;">
+        <span style="font-size: 16px;">👤</span>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 2px;">
+        <span style="font-size: 14px; font-weight: 500; color: #ffffff;">John Doe</span>
+        <span style="font-size: 12px; color: #64748b;">Admin</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div style="flex: 1; display: flex; flex-direction: column;">
+
+    <!-- Header -->
+    <div style="display: flex; justify-content: space-between; align-items: center; padding: 16px 32px; background-color: #ffffff; border-bottom: 1px solid #e2e8f0;">
+      <div style="display: flex; flex-direction: column; gap: 4px;">
+        <span style="font-size: 24px; font-weight: 700; color: #0f172a;">Dashboard</span>
+        <span style="font-size: 14px; color: #64748b;">Welcome back, John! Here's what's happening.</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 16px;">
+        <div style="display: flex; align-items: center; gap: 8px; padding: 8px 16px; background-color: #f1f5f9; border-radius: 8px;">
+          <span style="font-size: 14px;">🔍</span>
+          <span style="font-size: 14px; color: #94a3b8;">Search...</span>
+        </div>
+        <div style="width: 40px; height: 40px; background-color: #f1f5f9; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+          <span style="font-size: 18px;">🔔</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Content Area -->
+    <div style="flex: 1; padding: 32px; display: flex; flex-direction: column; gap: 24px; overflow: hidden;">
+
+      <!-- Stats Cards Row -->
+      <div style="display: flex; gap: 24px;">
+        <!-- Card 1 -->
+        <div style="flex: 1; background-color: #ffffff; border-radius: 16px; padding: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              <span style="font-size: 14px; color: #64748b;">Total Revenue</span>
+              <span style="font-size: 32px; font-weight: 700; color: #0f172a;">$48,574</span>
+              <div style="display: flex; align-items: center; gap: 4px;">
+                <span style="font-size: 12px; color: #22c55e;">↑ 12.5%</span>
+                <span style="font-size: 12px; color: #94a3b8;">vs last month</span>
+              </div>
+            </div>
+            <div style="width: 48px; height: 48px; background-color: #dbeafe; border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+              <span style="font-size: 24px;">💰</span>
+            </div>
+          </div>
+        </div>
+        <!-- Card 2 -->
+        <div style="flex: 1; background-color: #ffffff; border-radius: 16px; padding: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              <span style="font-size: 14px; color: #64748b;">Active Users</span>
+              <span style="font-size: 32px; font-weight: 700; color: #0f172a;">2,847</span>
+              <div style="display: flex; align-items: center; gap: 4px;">
+                <span style="font-size: 12px; color: #22c55e;">↑ 8.2%</span>
+                <span style="font-size: 12px; color: #94a3b8;">vs last month</span>
+              </div>
+            </div>
+            <div style="width: 48px; height: 48px; background-color: #dcfce7; border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+              <span style="font-size: 24px;">👥</span>
+            </div>
+          </div>
+        </div>
+        <!-- Card 3 -->
+        <div style="flex: 1; background-color: #ffffff; border-radius: 16px; padding: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              <span style="font-size: 14px; color: #64748b;">Conversion Rate</span>
+              <span style="font-size: 32px; font-weight: 700; color: #0f172a;">3.24%</span>
+              <div style="display: flex; align-items: center; gap: 4px;">
+                <span style="font-size: 12px; color: #ef4444;">↓ 2.1%</span>
+                <span style="font-size: 12px; color: #94a3b8;">vs last month</span>
+              </div>
+            </div>
+            <div style="width: 48px; height: 48px; background-color: #fef3c7; border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+              <span style="font-size: 24px;">📈</span>
+            </div>
+          </div>
+        </div>
+        <!-- Card 4 -->
+        <div style="flex: 1; background-color: #ffffff; border-radius: 16px; padding: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              <span style="font-size: 14px; color: #64748b;">Total Orders</span>
+              <span style="font-size: 32px; font-weight: 700; color: #0f172a;">1,284</span>
+              <div style="display: flex; align-items: center; gap: 4px;">
+                <span style="font-size: 12px; color: #22c55e;">↑ 18.7%</span>
+                <span style="font-size: 12px; color: #94a3b8;">vs last month</span>
+              </div>
+            </div>
+            <div style="width: 48px; height: 48px; background-color: #f3e8ff; border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+              <span style="font-size: 24px;">📦</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Charts and Table Row -->
+      <div style="display: flex; gap: 24px; flex: 1;">
+        <!-- Chart Area -->
+        <div style="flex: 2; background-color: #ffffff; border-radius: 16px; padding: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); display: flex; flex-direction: column;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+            <span style="font-size: 18px; font-weight: 600; color: #0f172a;">Revenue Overview</span>
+            <div style="display: flex; gap: 8px;">
+              <div style="padding: 6px 12px; background-color: #3b82f6; border-radius: 6px;">
+                <span style="font-size: 12px; font-weight: 500; color: #ffffff;">Monthly</span>
+              </div>
+              <div style="padding: 6px 12px; background-color: #f1f5f9; border-radius: 6px;">
+                <span style="font-size: 12px; color: #64748b;">Weekly</span>
+              </div>
+            </div>
+          </div>
+          <!-- Chart Placeholder -->
+          <div style="flex: 1; background-color: #f8fafc; border-radius: 12px; display: flex; align-items: center; justify-content: center; border: 2px dashed #e2e8f0;">
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+              <span style="font-size: 48px;">📊</span>
+              <span style="font-size: 14px; color: #94a3b8;">Chart Visualization</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent Orders Table -->
+        <div style="flex: 1; background-color: #ffffff; border-radius: 16px; padding: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); display: flex; flex-direction: column;">
+          <span style="font-size: 18px; font-weight: 600; color: #0f172a; margin-bottom: 16px;">Recent Orders</span>
+
+          <!-- Table Header -->
+          <div style="display: flex; padding: 12px 0; border-bottom: 1px solid #e2e8f0;">
+            <span style="flex: 2; font-size: 12px; font-weight: 600; color: #64748b;">CUSTOMER</span>
+            <span style="flex: 1; font-size: 12px; font-weight: 600; color: #64748b;">AMOUNT</span>
+            <span style="flex: 1; font-size: 12px; font-weight: 600; color: #64748b;">STATUS</span>
+          </div>
+
+          <!-- Table Rows -->
+          <div style="display: flex; flex-direction: column;">
+            <div style="display: flex; align-items: center; padding: 12px 0; border-bottom: 1px solid #f1f5f9;">
+              <div style="flex: 2; display: flex; align-items: center; gap: 8px;">
+                <div style="width: 32px; height: 32px; background-color: #dbeafe; border-radius: 16px; display: flex; align-items: center; justify-content: center;">
+                  <span style="font-size: 12px;">AS</span>
+                </div>
+                <span style="font-size: 14px; color: #0f172a;">Alice Smith</span>
+              </div>
+              <span style="flex: 1; font-size: 14px; color: #0f172a;">$245.00</span>
+              <div style="flex: 1;">
+                <div style="display: inline-flex; padding: 4px 8px; background-color: #dcfce7; border-radius: 4px;">
+                  <span style="font-size: 12px; color: #16a34a;">Completed</span>
+                </div>
+              </div>
+            </div>
+            <div style="display: flex; align-items: center; padding: 12px 0; border-bottom: 1px solid #f1f5f9;">
+              <div style="flex: 2; display: flex; align-items: center; gap: 8px;">
+                <div style="width: 32px; height: 32px; background-color: #fef3c7; border-radius: 16px; display: flex; align-items: center; justify-content: center;">
+                  <span style="font-size: 12px;">BJ</span>
+                </div>
+                <span style="font-size: 14px; color: #0f172a;">Bob Johnson</span>
+              </div>
+              <span style="flex: 1; font-size: 14px; color: #0f172a;">$189.50</span>
+              <div style="flex: 1;">
+                <div style="display: inline-flex; padding: 4px 8px; background-color: #fef3c7; border-radius: 4px;">
+                  <span style="font-size: 12px; color: #ca8a04;">Pending</span>
+                </div>
+              </div>
+            </div>
+            <div style="display: flex; align-items: center; padding: 12px 0; border-bottom: 1px solid #f1f5f9;">
+              <div style="flex: 2; display: flex; align-items: center; gap: 8px;">
+                <div style="width: 32px; height: 32px; background-color: #f3e8ff; border-radius: 16px; display: flex; align-items: center; justify-content: center;">
+                  <span style="font-size: 12px;">CW</span>
+                </div>
+                <span style="font-size: 14px; color: #0f172a;">Carol White</span>
+              </div>
+              <span style="flex: 1; font-size: 14px; color: #0f172a;">$432.00</span>
+              <div style="flex: 1;">
+                <div style="display: inline-flex; padding: 4px 8px; background-color: #dcfce7; border-radius: 4px;">
+                  <span style="font-size: 12px; color: #16a34a;">Completed</span>
+                </div>
+              </div>
+            </div>
+            <div style="display: flex; align-items: center; padding: 12px 0;">
+              <div style="flex: 2; display: flex; align-items: center; gap: 8px;">
+                <div style="width: 32px; height: 32px; background-color: #fee2e2; border-radius: 16px; display: flex; align-items: center; justify-content: center;">
+                  <span style="font-size: 12px;">DM</span>
+                </div>
+                <span style="font-size: 14px; color: #0f172a;">David Miller</span>
+              </div>
+              <span style="flex: 1; font-size: 14px; color: #0f172a;">$67.25</span>
+              <div style="flex: 1;">
+                <div style="display: inline-flex; padding: 4px 8px; background-color: #fee2e2; border-radius: 4px;">
+                  <span style="font-size: 12px; color: #dc2626;">Cancelled</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=390, initial-scale=1.0">
+  <title>NEXUS-9 Neural Command Interface</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: #000;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+  </style>
+</head>
+<body>
+<div style="width: 390px; height: 844px; background: linear-gradient(180deg, #0a0014 0%, #0d0028 50%, #050510 100%); display: flex; flex-direction: column; position: relative; overflow: hidden;">
+
+  <!-- Ambient glow orbs -->
+  <div style="position: absolute; width: 200px; height: 200px; background: radial-gradient(circle, rgba(255, 0, 128, 0.4) 0%, transparent 70%); top: 100px; left: -50px;"></div>
+  <div style="position: absolute; width: 250px; height: 250px; background: radial-gradient(circle, rgba(0, 255, 255, 0.3) 0%, transparent 70%); top: 300px; right: -80px;"></div>
+  <div style="position: absolute; width: 180px; height: 180px; background: radial-gradient(circle, rgba(180, 255, 0, 0.25) 0%, transparent 70%); bottom: 150px; left: 50px;"></div>
+
+  <!-- Status bar -->
+  <div style="display: flex; justify-content: space-between; align-items: center; padding: 14px 24px; position: relative; z-index: 10;">
+    <span style="color: #00ffff; font-size: 15px; font-weight: 700; text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);">09:41</span>
+    <div style="display: flex; gap: 8px; align-items: center;">
+      <span style="color: #00ff88; font-size: 12px;">●●●●○</span>
+      <span style="color: #b4ff00; font-size: 14px; text-shadow: 0 0 8px rgba(180, 255, 0, 0.8);">⚡87%</span>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 24px; position: relative; z-index: 10;">
+    <div style="display: flex; flex-direction: column; gap: 2px;">
+      <span style="color: #ffffff; font-size: 24px; font-weight: 800; letter-spacing: 4px;">NEXUS-9</span>
+      <div style="display: flex; align-items: center; gap: 6px;">
+        <div style="width: 8px; height: 8px; background: #00ff88; border-radius: 4px; box-shadow: 0 0 10px #00ff88;"></div>
+        <span style="color: rgba(255, 255, 255, 0.5); font-size: 11px; letter-spacing: 2px;">NEURAL LINK ACTIVE</span>
+      </div>
+    </div>
+    <div style="width: 48px; height: 48px; background: linear-gradient(135deg, rgba(255, 0, 128, 0.3) 0%, rgba(139, 0, 255, 0.3) 100%); border-radius: 16px; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255, 0, 128, 0.4); backdrop-filter: blur(10px);">
+      <span style="font-size: 24px;">👤</span>
+    </div>
+  </div>
+
+  <!-- AI Status Card -->
+  <div style="margin: 16px 24px; padding: 20px; background: rgba(255, 255, 255, 0.05); border-radius: 24px; border: 1px solid rgba(0, 255, 255, 0.2); backdrop-filter: blur(20px); position: relative; z-index: 10;">
+    <div style="display: flex; align-items: center; gap: 16px;">
+      <div style="width: 56px; height: 56px; background: linear-gradient(135deg, #00ffff 0%, #ff0080 100%); border-radius: 16px; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 30px rgba(0, 255, 255, 0.5);">
+        <span style="font-size: 28px;">👁</span>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 4px; flex: 1;">
+        <span style="color: #ffffff; font-size: 18px; font-weight: 700;">CORTEX AI</span>
+        <span style="color: rgba(255, 255, 255, 0.5); font-size: 12px;">Processing: 98.7%</span>
+        <div style="width: 200px; height: 4px; background: rgba(255, 255, 255, 0.1); border-radius: 2px; margin-top: 4px;">
+          <div style="width: 190px; height: 4px; background: linear-gradient(90deg, #00ffff 0%, #b4ff00 100%); border-radius: 2px; box-shadow: 0 0 10px rgba(0, 255, 255, 0.6);"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stats Grid -->
+  <div style="display: flex; gap: 12px; padding: 0 24px; position: relative; z-index: 10;">
+    <!-- Left column -->
+    <div style="display: flex; flex-direction: column; gap: 12px; flex: 1;">
+      <!-- Sync Rate -->
+      <div style="padding: 16px; background: rgba(255, 0, 128, 0.1); border-radius: 20px; border: 1px solid rgba(255, 0, 128, 0.3);">
+        <span style="color: rgba(255, 255, 255, 0.5); font-size: 10px; letter-spacing: 1px;">SYNC RATE</span>
+        <div style="display: flex; align-items: baseline; gap: 4px; margin-top: 8px;">
+          <span style="color: #ff0080; font-size: 32px; font-weight: 800; text-shadow: 0 0 20px rgba(255, 0, 128, 0.6);">147</span>
+          <span style="color: rgba(255, 255, 255, 0.4); font-size: 14px;">ms</span>
+        </div>
+        <div style="display: flex; gap: 4px; margin-top: 12px;">
+          <div style="width: 24px; height: 6px; background: #ff0080; border-radius: 3px;"></div>
+          <div style="width: 24px; height: 6px; background: #ff0080; border-radius: 3px;"></div>
+          <div style="width: 24px; height: 6px; background: #ff0080; border-radius: 3px;"></div>
+          <div style="width: 24px; height: 6px; background: rgba(255, 0, 128, 0.3); border-radius: 3px;"></div>
+        </div>
+      </div>
+      <!-- Bandwidth -->
+      <div style="padding: 16px; background: rgba(180, 255, 0, 0.1); border-radius: 20px; border: 1px solid rgba(180, 255, 0, 0.3);">
+        <span style="color: rgba(255, 255, 255, 0.5); font-size: 10px; letter-spacing: 1px;">BANDWIDTH</span>
+        <div style="display: flex; align-items: baseline; gap: 4px; margin-top: 8px;">
+          <span style="color: #b4ff00; font-size: 28px; font-weight: 800; text-shadow: 0 0 20px rgba(180, 255, 0, 0.6);">2.4</span>
+          <span style="color: rgba(255, 255, 255, 0.4); font-size: 14px;">TB/s</span>
+        </div>
+      </div>
+    </div>
+    <!-- Right column - Neural Cores -->
+    <div style="width: 140px; padding: 16px; background: rgba(139, 0, 255, 0.1); border-radius: 20px; border: 1px solid rgba(139, 0, 255, 0.3);">
+      <span style="color: rgba(255, 255, 255, 0.5); font-size: 10px; letter-spacing: 1px;">NEURAL CORES</span>
+      <div style="display: flex; align-items: baseline; gap: 4px; margin-top: 8px;">
+        <span style="color: #8b00ff; font-size: 40px; font-weight: 800; text-shadow: 0 0 20px rgba(139, 0, 255, 0.6);">12</span>
+      </div>
+      <span style="color: rgba(255, 255, 255, 0.4); font-size: 11px;">active threads</span>
+      <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px;">
+        <div style="width: 20px; height: 20px; background: #8b00ff; border-radius: 6px; box-shadow: 0 0 10px rgba(139, 0, 255, 0.6);"></div>
+        <div style="width: 20px; height: 20px; background: #8b00ff; border-radius: 6px; box-shadow: 0 0 10px rgba(139, 0, 255, 0.6);"></div>
+        <div style="width: 20px; height: 20px; background: #8b00ff; border-radius: 6px; box-shadow: 0 0 10px rgba(139, 0, 255, 0.6);"></div>
+        <div style="width: 20px; height: 20px; background: #8b00ff; border-radius: 6px; box-shadow: 0 0 10px rgba(139, 0, 255, 0.6);"></div>
+        <div style="width: 20px; height: 20px; background: rgba(139, 0, 255, 0.3); border-radius: 6px;"></div>
+        <div style="width: 20px; height: 20px; background: rgba(139, 0, 255, 0.3); border-radius: 6px;"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Live Data Stream -->
+  <div style="margin: 16px 24px; padding: 16px; background: rgba(255, 255, 255, 0.03); border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.08); position: relative; z-index: 10;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+      <span style="color: rgba(255, 255, 255, 0.6); font-size: 12px; letter-spacing: 1px;">LIVE DATA STREAM</span>
+      <div style="display: flex; align-items: center; gap: 6px;">
+        <div style="width: 6px; height: 6px; background: #00ff88; border-radius: 3px; box-shadow: 0 0 8px #00ff88;"></div>
+        <span style="color: #00ff88; font-size: 10px;">LIVE</span>
+      </div>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 10px;">
+      <div style="display: flex; align-items: center; gap: 12px; padding: 10px; background: rgba(0, 255, 255, 0.05); border-radius: 12px; border-left: 3px solid #00ffff;">
+        <span style="color: #00ffff; font-size: 16px;">◈</span>
+        <div style="display: flex; flex-direction: column; gap: 2px;">
+          <span style="color: #ffffff; font-size: 13px;">Neural Pattern Detected</span>
+          <span style="color: rgba(255, 255, 255, 0.4); font-size: 10px;">Cluster A7 • 2ms ago</span>
+        </div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 12px; padding: 10px; background: rgba(255, 0, 128, 0.05); border-radius: 12px; border-left: 3px solid #ff0080;">
+        <span style="color: #ff0080; font-size: 16px;">◉</span>
+        <div style="display: flex; flex-direction: column; gap: 2px;">
+          <span style="color: #ffffff; font-size: 13px;">Quantum Sync Complete</span>
+          <span style="color: rgba(255, 255, 255, 0.4); font-size: 10px;">Core 7 • 15ms ago</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quick Actions -->
+  <div style="display: flex; gap: 10px; padding: 0 24px; margin-top: auto; margin-bottom: 16px; position: relative; z-index: 10;">
+    <div style="flex: 1; padding: 14px; background: linear-gradient(135deg, #ff0080 0%, #ff4da6 100%); border-radius: 16px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(255, 0, 128, 0.5);">
+      <span style="color: #ffffff; font-size: 12px; font-weight: 700; letter-spacing: 1px;">INITIALIZE</span>
+    </div>
+    <div style="flex: 1; padding: 14px; background: rgba(0, 255, 255, 0.1); border-radius: 16px; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(0, 255, 255, 0.4);">
+      <span style="color: #00ffff; font-size: 12px; font-weight: 700; letter-spacing: 1px;">CONFIG</span>
+    </div>
+    <div style="flex: 1; padding: 14px; background: rgba(180, 255, 0, 0.1); border-radius: 16px; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(180, 255, 0, 0.4);">
+      <span style="color: #b4ff00; font-size: 12px; font-weight: 700; letter-spacing: 1px;">ANALYZE</span>
+    </div>
+  </div>
+
+  <!-- Bottom Navigation -->
+  <div style="display: flex; justify-content: space-around; align-items: center; padding: 16px 32px; background: rgba(255, 255, 255, 0.03); border-top: 1px solid rgba(255, 255, 255, 0.05); position: relative; z-index: 10;">
+    <div style="width: 48px; height: 48px; background: linear-gradient(135deg, #00ffff 0%, #00ff88 100%); border-radius: 14px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(0, 255, 255, 0.4);">
+      <span style="font-size: 20px;">🏠</span>
+    </div>
+    <div style="width: 48px; height: 48px; display: flex; align-items: center; justify-content: center;">
+      <span style="color: rgba(255, 255, 255, 0.4); font-size: 20px;">📊</span>
+    </div>
+    <div style="width: 64px; height: 64px; background: linear-gradient(135deg, #ff0080 0%, #8b00ff 100%); border-radius: 20px; display: flex; align-items: center; justify-content: center; margin-top: -32px; box-shadow: 0 8px 30px rgba(255, 0, 128, 0.5);">
+      <span style="color: #ffffff; font-size: 28px;">+</span>
+    </div>
+    <div style="width: 48px; height: 48px; display: flex; align-items: center; justify-content: center;">
+      <span style="color: rgba(255, 255, 255, 0.4); font-size: 20px;">⚡</span>
+    </div>
+    <div style="width: 48px; height: 48px; display: flex; align-items: center; justify-content: center;">
+      <span style="color: rgba(255, 255, 255, 0.4); font-size: 20px;">⚙️</span>
+    </div>
+  </div>
+
+  <!-- Home indicator -->
+  <div style="display: flex; justify-content: center; padding: 8px 0 12px 0; position: relative; z-index: 10;">
+    <div style="width: 134px; height: 5px; background: rgba(255, 255, 255, 0.3); border-radius: 3px;"></div>
+  </div>
+</div>
+</body>
+</html>

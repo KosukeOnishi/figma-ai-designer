@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Test 03: Horizontal Layout with margin-bottom</title>
+  <style>
+    body { display: flex; justify-content: center; padding: 40px; background: #e0e0e0; }
+  </style>
+</head>
+<body>
+
+<!--
+  Test: margin-bottom on children in horizontal flex
+  Expected: margin-bottom should NOT affect horizontal layout (CSS behavior)
+  Potential issue: Plugin might create unnecessary vertical spacers
+-->
+<div style="width: 300px; display: flex; gap: 10px; background-color: #333; padding: 10px;">
+  <div style="width: 80px; height: 50px; background-color: #4a90d9; margin-bottom: 20px;"></div>
+  <div style="width: 80px; height: 50px; background-color: #d94a4a;"></div>
+  <div style="width: 80px; height: 50px; background-color: #4ad94a; margin-bottom: 20px;"></div>
+</div>
+
+</body>
+</html>

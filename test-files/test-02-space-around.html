@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Test 02: space-around vs space-between</title>
+  <style>
+    body { display: flex; flex-direction: column; gap: 20px; padding: 40px; background: #e0e0e0; }
+  </style>
+</head>
+<body>
+
+<!--
+  Test: justify-content: space-around
+  Expected: Half-size space at edges, full space between items
+  Note: Figma only supports SPACE_BETWEEN, so edges will have no space (known limitation)
+-->
+<div style="width: 300px; display: flex; justify-content: space-around; background-color: #333; padding: 10px 0;">
+  <div style="width: 40px; height: 40px; background-color: #4a90d9;"></div>
+  <div style="width: 40px; height: 40px; background-color: #4a90d9;"></div>
+  <div style="width: 40px; height: 40px; background-color: #4a90d9;"></div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TASKR - Neo Brutalist Task App</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+</head>
+<body style="margin: 0; padding: 20px; min-height: 100vh; display: flex; justify-content: center; align-items: center; background: #1a1a1a; font-family: 'Space Mono', monospace;">
+
+  <div style="width: 390px; height: 844px; background: #FFFEF0; border-radius: 48px; overflow: hidden; position: relative; color: #1a1a1a; border: 4px solid #1a1a1a;">
+
+    <!-- Status Bar -->
+    <div style="position: absolute; top: 0; left: 0; right: 0; height: 54px; display: flex; justify-content: space-between; align-items: flex-end; padding: 0 28px 8px; font-size: 12px; font-weight: 700; color: #1a1a1a; font-family: 'Space Mono', monospace;">
+      <span>09:41</span>
+      <div style="display: flex; gap: 6px; align-items: center;">
+        <div style="width: 18px; height: 12px; background: #1a1a1a; border-radius: 2px;"></div>
+        <div style="width: 16px; height: 12px; background: #1a1a1a; border-radius: 2px;"></div>
+        <div style="width: 25px; height: 12px; background: #1a1a1a; border-radius: 3px;"></div>
+      </div>
+    </div>
+
+    <!-- Dynamic Island -->
+    <div style="position: absolute; top: 12px; left: 132px; width: 126px; height: 36px; background: #1a1a1a; border-radius: 20px;"></div>
+
+    <!-- App Container -->
+    <div style="width: 100%; height: 100%; position: relative; overflow: hidden; padding: 70px 20px 100px;">
+
+      <!-- Content -->
+      <div style="position: relative; z-index: 1; height: 100%; display: flex; flex-direction: column;">
+
+        <!-- Header -->
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 24px;">
+          <div>
+            <div style="font-family: 'Bebas Neue', sans-serif; font-size: 56px; font-weight: 400; color: #1a1a1a; line-height: 0.9; letter-spacing: -2px;">TASKR</div>
+            <div style="font-family: 'Space Mono', monospace; font-size: 11px; font-weight: 400; color: #1a1a1a; margin-top: 4px; text-transform: uppercase;">Monday, Jan 13</div>
+          </div>
+          <div style="width: 52px; height: 52px; background: #FF5722; border: 3px solid #1a1a1a; display: flex; align-items: center; justify-content: center;">
+            <span style="font-family: 'Bebas Neue', sans-serif; font-size: 24px; color: #FFFEF0; line-height: 1;">JK</span>
+          </div>
+        </div>
+
+        <!-- Stats Grid -->
+        <div style="display: flex; gap: 12px; margin-bottom: 24px;">
+          <div style="flex: 1; background: #1a1a1a; padding: 16px; border: 3px solid #1a1a1a;">
+            <div style="font-family: 'Bebas Neue', sans-serif; font-size: 48px; color: #FFFEF0; line-height: 1;">07</div>
+            <div style="font-family: 'Space Mono', monospace; font-size: 10px; color: #FFFEF0; text-transform: uppercase;">Tasks Left</div>
+          </div>
+          <div style="flex: 1; background: #FFE135; padding: 16px; border: 3px solid #1a1a1a;">
+            <div style="font-family: 'Bebas Neue', sans-serif; font-size: 48px; color: #1a1a1a; line-height: 1;">12</div>
+            <div style="font-family: 'Space Mono', monospace; font-size: 10px; color: #1a1a1a; text-transform: uppercase;">Completed</div>
+          </div>
+          <div style="flex: 1; background: #FFFEF0; padding: 16px; border: 3px solid #1a1a1a;">
+            <div style="font-family: 'Bebas Neue', sans-serif; font-size: 48px; color: #1a1a1a; line-height: 1;">63</div>
+            <div style="font-family: 'Space Mono', monospace; font-size: 10px; color: #1a1a1a; text-transform: uppercase;">% Done</div>
+          </div>
+        </div>
+
+        <!-- Priority Section -->
+        <div style="margin-bottom: 20px;">
+          <div style="font-family: 'Bebas Neue', sans-serif; font-size: 24px; color: #1a1a1a; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+            <span style="width: 12px; height: 12px; background: #FF5722;"></span>
+            HIGH PRIORITY
+          </div>
+
+          <!-- Task Item 1 -->
+          <div style="background: #FFFEF0; border: 3px solid #1a1a1a; padding: 16px; margin-bottom: 8px; display: flex; align-items: center; gap: 12px;">
+            <div style="width: 24px; height: 24px; border: 3px solid #1a1a1a; flex-shrink: 0;"></div>
+            <div style="flex: 1;">
+              <div style="font-family: 'Space Mono', monospace; font-size: 14px; font-weight: 700; color: #1a1a1a;">Fix production bug</div>
+              <div style="font-family: 'Space Mono', monospace; font-size: 10px; color: #666;">WORK • DUE TODAY</div>
+            </div>
+            <div style="background: #FF5722; color: #FFFEF0; font-family: 'Space Mono', monospace; font-size: 10px; padding: 4px 8px; font-weight: 700;">!</div>
+          </div>
+
+          <!-- Task Item 2 -->
+          <div style="background: #1a1a1a; border: 3px solid #1a1a1a; padding: 16px; display: flex; align-items: center; gap: 12px;">
+            <div style="width: 24px; height: 24px; border: 3px solid #FFFEF0; background: #FFE135; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 14px; color: #1a1a1a;">✓</div>
+            <div style="flex: 1;">
+              <div style="font-family: 'Space Mono', monospace; font-size: 14px; font-weight: 700; color: #666; text-decoration: line-through;">Review pull request</div>
+              <div style="font-family: 'Space Mono', monospace; font-size: 10px; color: #444;">WORK • COMPLETED</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Regular Tasks -->
+        <div style="margin-bottom: 20px;">
+          <div style="font-family: 'Bebas Neue', sans-serif; font-size: 24px; color: #1a1a1a; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+            <span style="width: 12px; height: 12px; background: #1a1a1a;"></span>
+            TODAY
+          </div>
+
+          <!-- Task Item 3 -->
+          <div style="background: #FFFEF0; border: 3px solid #1a1a1a; padding: 16px; margin-bottom: 8px; display: flex; align-items: center; gap: 12px;">
+            <div style="width: 24px; height: 24px; border: 3px solid #1a1a1a; flex-shrink: 0;"></div>
+            <div style="flex: 1;">
+              <div style="font-family: 'Space Mono', monospace; font-size: 14px; font-weight: 700; color: #1a1a1a;">Grocery shopping</div>
+              <div style="font-family: 'Space Mono', monospace; font-size: 10px; color: #666;">PERSONAL • 18:00</div>
+            </div>
+          </div>
+
+          <!-- Task Item 4 -->
+          <div style="background: #FFFEF0; border: 3px solid #1a1a1a; padding: 16px; margin-bottom: 8px; display: flex; align-items: center; gap: 12px;">
+            <div style="width: 24px; height: 24px; border: 3px solid #1a1a1a; flex-shrink: 0;"></div>
+            <div style="flex: 1;">
+              <div style="font-family: 'Space Mono', monospace; font-size: 14px; font-weight: 700; color: #1a1a1a;">Call mom</div>
+              <div style="font-family: 'Space Mono', monospace; font-size: 10px; color: #666;">PERSONAL • ANYTIME</div>
+            </div>
+          </div>
+
+          <!-- Task Item 5 -->
+          <div style="background: #FFE135; border: 3px solid #1a1a1a; padding: 16px; display: flex; align-items: center; gap: 12px;">
+            <div style="width: 24px; height: 24px; border: 3px solid #1a1a1a; flex-shrink: 0;"></div>
+            <div style="flex: 1;">
+              <div style="font-family: 'Space Mono', monospace; font-size: 14px; font-weight: 700; color: #1a1a1a;">Team standup</div>
+              <div style="font-family: 'Space Mono', monospace; font-size: 10px; color: #1a1a1a;">WORK • 10:00 - 10:30</div>
+            </div>
+            <div style="font-family: 'Space Mono', monospace; font-size: 10px; color: #1a1a1a; font-weight: 700;">IN 20MIN</div>
+          </div>
+        </div>
+
+        <!-- Add Task Button -->
+        <div style="background: #FF5722; border: 3px solid #1a1a1a; padding: 18px; display: flex; align-items: center; justify-content: center; gap: 12px;">
+          <span style="font-family: 'Bebas Neue', sans-serif; font-size: 32px; color: #FFFEF0; line-height: 1;">+</span>
+          <span style="font-family: 'Bebas Neue', sans-serif; font-size: 20px; color: #FFFEF0; letter-spacing: 2px;">ADD NEW TASK</span>
+        </div>
+
+      </div>
+
+      <!-- Bottom Navigation -->
+      <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 88px; background: #1a1a1a; padding: 0 24px 28px; display: flex; justify-content: space-around; align-items: flex-end;">
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 4px;">
+          <div style="width: 28px; height: 28px; background: #FFE135; display: flex; align-items: center; justify-content: center; font-size: 14px;">📋</div>
+          <span style="font-family: 'Space Mono', monospace; font-size: 9px; font-weight: 700; color: #FFE135; text-transform: uppercase;">Tasks</span>
+        </div>
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 4px;">
+          <div style="width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; font-size: 14px;">📊</div>
+          <span style="font-family: 'Space Mono', monospace; font-size: 9px; font-weight: 700; color: #666; text-transform: uppercase;">Stats</span>
+        </div>
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 4px;">
+          <div style="width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; font-size: 14px;">📅</div>
+          <span style="font-family: 'Space Mono', monospace; font-size: 9px; font-weight: 700; color: #666; text-transform: uppercase;">Calendar</span>
+        </div>
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 4px;">
+          <div style="width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; font-size: 14px;">⚙️</div>
+          <span style="font-family: 'Space Mono', monospace; font-size: 9px; font-weight: 700; color: #666; text-transform: uppercase;">Config</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

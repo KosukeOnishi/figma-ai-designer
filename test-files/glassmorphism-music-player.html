@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Glassmorphism Music Player</title>
+</head>
+<body>
+<!-- Glassmorphism Music Player - 375x812 -->
+<div style="width: 375px; height: 812px; background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%); display: flex; flex-direction: column; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif; position: relative; overflow: hidden;">
+
+  <!-- Background Blobs -->
+  <div style="position: absolute; width: 200px; height: 200px; background: rgba(255, 255, 255, 0.3); border-radius: 100px; top: -50px; right: -50px;"></div>
+  <div style="position: absolute; width: 150px; height: 150px; background: rgba(236, 72, 153, 0.4); border-radius: 75px; bottom: 200px; left: -30px;"></div>
+  <div style="position: absolute; width: 180px; height: 180px; background: rgba(99, 102, 241, 0.3); border-radius: 90px; bottom: -40px; right: -40px;"></div>
+
+  <!-- Status Bar -->
+  <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 24px 8px 24px; height: 44px;">
+    <span style="font-size: 14px; font-weight: 600; color: #ffffff;">9:41</span>
+    <div style="display: flex; gap: 6px; align-items: center;">
+      <div style="width: 18px; height: 12px; border: 1px solid #ffffff; border-radius: 3px; display: flex; align-items: center; padding: 2px;">
+        <div style="width: 12px; height: 6px; background: #ffffff; border-radius: 1px;"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <div style="display: flex; justify-content: space-between; align-items: center; padding: 16px 24px;">
+    <div style="width: 40px; height: 40px; border-radius: 12px; background: rgba(255, 255, 255, 0.2); border: 1px solid rgba(255, 255, 255, 0.3); display: flex; align-items: center; justify-content: center;">
+      <span style="font-size: 18px; color: #ffffff;">←</span>
+    </div>
+    <span style="font-size: 17px; font-weight: 600; color: #ffffff;">Now Playing</span>
+    <div style="width: 40px; height: 40px; border-radius: 12px; background: rgba(255, 255, 255, 0.2); border: 1px solid rgba(255, 255, 255, 0.3); display: flex; align-items: center; justify-content: center;">
+      <span style="font-size: 18px; color: #ffffff;">⋯</span>
+    </div>
+  </div>
+
+  <!-- Album Art Glass Card -->
+  <div style="margin: 24px; padding: 16px; background: rgba(255, 255, 255, 0.15); border-radius: 32px; border: 1px solid rgba(255, 255, 255, 0.3); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);">
+    <div style="width: 100%; aspect-ratio: 1; border-radius: 24px; background: linear-gradient(145deg, #1a1a2e 0%, #16213e 100%); display: flex; align-items: center; justify-content: center; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);">
+      <div style="width: 120px; height: 120px; border-radius: 60px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; align-items: center; justify-content: center; box-shadow: 0 0 60px rgba(102, 126, 234, 0.5);">
+        <span style="font-size: 48px;">🎵</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Song Info Glass Card -->
+  <div style="margin: 0 24px 24px 24px; padding: 20px 24px; background: rgba(255, 255, 255, 0.2); border-radius: 24px; border: 1px solid rgba(255, 255, 255, 0.3); display: flex; flex-direction: column; gap: 4px; align-items: center;">
+    <span style="font-size: 22px; font-weight: 700; color: #ffffff;">Blinding Lights</span>
+    <span style="font-size: 15px; color: rgba(255, 255, 255, 0.7);">The Weeknd</span>
+  </div>
+
+  <!-- Progress Bar -->
+  <div style="margin: 0 24px; display: flex; flex-direction: column; gap: 8px;">
+    <div style="height: 6px; background: rgba(255, 255, 255, 0.2); border-radius: 3px; overflow: hidden;">
+      <div style="width: 45%; height: 100%; background: #ffffff; border-radius: 3px;"></div>
+    </div>
+    <div style="display: flex; justify-content: space-between;">
+      <span style="font-size: 12px; color: rgba(255, 255, 255, 0.6);">1:42</span>
+      <span style="font-size: 12px; color: rgba(255, 255, 255, 0.6);">3:20</span>
+    </div>
+  </div>
+
+  <!-- Controls Glass Card -->
+  <div style="margin: 24px; padding: 20px; background: rgba(255, 255, 255, 0.15); border-radius: 28px; border: 1px solid rgba(255, 255, 255, 0.3); display: flex; justify-content: space-around; align-items: center;">
+    <div style="width: 48px; height: 48px; border-radius: 24px; display: flex; align-items: center; justify-content: center;">
+      <span style="font-size: 24px; color: rgba(255, 255, 255, 0.8);">🔀</span>
+    </div>
+    <div style="width: 48px; height: 48px; border-radius: 24px; display: flex; align-items: center; justify-content: center;">
+      <span style="font-size: 32px; color: #ffffff;">⏮</span>
+    </div>
+    <div style="width: 72px; height: 72px; border-radius: 36px; background: #ffffff; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);">
+      <span style="font-size: 32px; color: #764ba2;">▶</span>
+    </div>
+    <div style="width: 48px; height: 48px; border-radius: 24px; display: flex; align-items: center; justify-content: center;">
+      <span style="font-size: 32px; color: #ffffff;">⏭</span>
+    </div>
+    <div style="width: 48px; height: 48px; border-radius: 24px; display: flex; align-items: center; justify-content: center;">
+      <span style="font-size: 24px; color: rgba(255, 255, 255, 0.8);">🔁</span>
+    </div>
+  </div>
+
+  <!-- Bottom Actions -->
+  <div style="flex: 1;"></div>
+  <div style="margin: 0 24px 32px 24px; display: flex; justify-content: space-around; align-items: center;">
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+      <div style="width: 52px; height: 52px; border-radius: 16px; background: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.25); display: flex; align-items: center; justify-content: center;">
+        <span style="font-size: 22px;">❤️</span>
+      </div>
+      <span style="font-size: 11px; color: rgba(255, 255, 255, 0.7);">Like</span>
+    </div>
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+      <div style="width: 52px; height: 52px; border-radius: 16px; background: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.25); display: flex; align-items: center; justify-content: center;">
+        <span style="font-size: 22px;">📝</span>
+      </div>
+      <span style="font-size: 11px; color: rgba(255, 255, 255, 0.7);">Lyrics</span>
+    </div>
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+      <div style="width: 52px; height: 52px; border-radius: 16px; background: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.25); display: flex; align-items: center; justify-content: center;">
+        <span style="font-size: 22px;">📋</span>
+      </div>
+      <span style="font-size: 11px; color: rgba(255, 255, 255, 0.7);">Queue</span>
+    </div>
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+      <div style="width: 52px; height: 52px; border-radius: 16px; background: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.25); display: flex; align-items: center; justify-content: center;">
+        <span style="font-size: 22px;">📤</span>
+      </div>
+      <span style="font-size: 11px; color: rgba(255, 255, 255, 0.7);">Share</span>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

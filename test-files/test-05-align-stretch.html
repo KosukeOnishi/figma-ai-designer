@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Test 05: align-items stretch (default)</title>
+  <style>
+    body { display: flex; justify-content: center; padding: 40px; background: #e0e0e0; }
+  </style>
+</head>
+<body>
+
+<!--
+  Test: CSS flexbox default align-items: stretch
+  Expected: Items without explicit height should stretch to fill container height
+  - First box (width only): should stretch to 100px height
+  - Second box (explicit height 40px): should stay 40px
+  - Third box (no dimensions): should stretch to 100px height
+-->
+<div style="width: 300px; height: 100px; display: flex; gap: 10px; background-color: #333; padding: 10px;">
+  <div style="width: 60px; background-color: #4a90d9;"></div>
+  <div style="width: 60px; height: 40px; background-color: #d94a4a;"></div>
+  <div style="background-color: #4ad94a; padding: 10px;">
+    <span style="color: white; font-size: 12px;">auto</span>
+  </div>
+</div>
+
+</body>
+</html>

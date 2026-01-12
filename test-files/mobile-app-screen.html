@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Food Delivery App - Home</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+  </style>
+</head>
+<body>
+  <!-- Mobile App Screen: 390x844 (iPhone 14 size) -->
+  <div style="width: 390px; height: 844px; background-color: #f8f9fa; display: flex; flex-direction: column; font-family: Inter;">
+
+    <!-- Status Bar -->
+    <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 24px; background-color: #ffffff;">
+      <span style="font-size: 14px; font-weight: 600; color: #1a1a1a;">9:41</span>
+      <div style="display: flex; gap: 6px; align-items: center;">
+        <span style="font-size: 12px; color: #1a1a1a;">📶</span>
+        <span style="font-size: 12px; color: #1a1a1a;">📡</span>
+        <span style="font-size: 12px; color: #1a1a1a;">🔋</span>
+      </div>
+    </div>
+
+    <!-- Header -->
+    <div style="display: flex; justify-content: space-between; align-items: center; padding: 16px 24px; background-color: #ffffff;">
+      <div style="display: flex; flex-direction: column; gap: 4px;">
+        <span style="font-size: 12px; color: #6b7280;">Deliver to</span>
+        <div style="display: flex; align-items: center; gap: 4px;">
+          <span style="font-size: 16px; font-weight: 600; color: #1a1a1a;">Home</span>
+          <span style="font-size: 12px; color: #6b7280;">▼</span>
+        </div>
+      </div>
+      <div style="width: 40px; height: 40px; background-color: #fee2e2; border-radius: 20px; display: flex; align-items: center; justify-content: center;">
+        <span style="font-size: 18px;">🔔</span>
+      </div>
+    </div>
+
+    <!-- Search Bar -->
+    <div style="padding: 0 24px 16px 24px; background-color: #ffffff;">
+      <div style="display: flex; align-items: center; gap: 12px; padding: 12px 16px; background-color: #f3f4f6; border-radius: 12px;">
+        <span style="font-size: 16px; color: #9ca3af;">🔍</span>
+        <span style="font-size: 14px; color: #9ca3af;">Search for restaurants or dishes...</span>
+      </div>
+    </div>
+
+    <!-- Categories -->
+    <div style="padding: 16px 24px; background-color: #ffffff;">
+      <div style="display: flex; gap: 12px;">
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+          <div style="width: 56px; height: 56px; background-color: #fef3c7; border-radius: 16px; display: flex; align-items: center; justify-content: center;">
+            <span style="font-size: 24px;">🍕</span>
+          </div>
+          <span style="font-size: 12px; color: #374151;">Pizza</span>
+        </div>
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+          <div style="width: 56px; height: 56px; background-color: #dbeafe; border-radius: 16px; display: flex; align-items: center; justify-content: center;">
+            <span style="font-size: 24px;">🍔</span>
+          </div>
+          <span style="font-size: 12px; color: #374151;">Burger</span>
+        </div>
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+          <div style="width: 56px; height: 56px; background-color: #dcfce7; border-radius: 16px; display: flex; align-items: center; justify-content: center;">
+            <span style="font-size: 24px;">🍜</span>
+          </div>
+          <span style="font-size: 12px; color: #374151;">Asian</span>
+        </div>
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+          <div style="width: 56px; height: 56px; background-color: #fce7f3; border-radius: 16px; display: flex; align-items: center; justify-content: center;">
+            <span style="font-size: 24px;">🍰</span>
+          </div>
+          <span style="font-size: 12px; color: #374151;">Dessert</span>
+        </div>
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+          <div style="width: 56px; height: 56px; background-color: #e0e7ff; border-radius: 16px; display: flex; align-items: center; justify-content: center;">
+            <span style="font-size: 24px;">☕</span>
+          </div>
+          <span style="font-size: 12px; color: #374151;">Coffee</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Promotional Banner -->
+    <div style="padding: 16px 24px;">
+      <div style="background: linear-gradient(135deg, #f97316, #ea580c); border-radius: 16px; padding: 20px; display: flex; justify-content: space-between; align-items: center;">
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <span style="font-size: 18px; font-weight: 700; color: #ffffff;">Free Delivery!</span>
+          <span style="font-size: 13px; color: #fed7aa;">On orders above $25</span>
+          <div style="background-color: #ffffff; padding: 8px 16px; border-radius: 8px; margin-top: 4px; width: 100px;">
+            <span style="font-size: 12px; font-weight: 600; color: #ea580c;">Order Now</span>
+          </div>
+        </div>
+        <div style="width: 80px; height: 80px; display: flex; align-items: center; justify-content: center;">
+          <span style="font-size: 56px;">🛵</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Restaurant Section -->
+    <div style="flex: 1; padding: 0 24px; display: flex; flex-direction: column; gap: 12px;">
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <span style="font-size: 18px; font-weight: 600; color: #1a1a1a;">Popular Restaurants</span>
+        <span style="font-size: 14px; color: #f97316;">See all</span>
+      </div>
+
+      <!-- Restaurant Card 1 -->
+      <div style="background-color: #ffffff; border-radius: 16px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+        <div style="height: 120px; background-color: #fde68a; display: flex; align-items: center; justify-content: center;">
+          <span style="font-size: 48px;">🍝</span>
+        </div>
+        <div style="padding: 12px 16px;">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+            <div style="display: flex; flex-direction: column; gap: 4px;">
+              <span style="font-size: 16px; font-weight: 600; color: #1a1a1a;">Pasta Paradise</span>
+              <span style="font-size: 12px; color: #6b7280;">Italian • $$ • 25-35 min</span>
+            </div>
+            <div style="background-color: #dcfce7; padding: 4px 8px; border-radius: 6px; display: flex; align-items: center; gap: 4px;">
+              <span style="font-size: 12px; color: #16a34a;">★</span>
+              <span style="font-size: 12px; font-weight: 600; color: #16a34a;">4.8</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Restaurant Card 2 -->
+      <div style="background-color: #ffffff; border-radius: 16px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+        <div style="height: 120px; background-color: #bfdbfe; display: flex; align-items: center; justify-content: center;">
+          <span style="font-size: 48px;">🍣</span>
+        </div>
+        <div style="padding: 12px 16px;">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+            <div style="display: flex; flex-direction: column; gap: 4px;">
+              <span style="font-size: 16px; font-weight: 600; color: #1a1a1a;">Sushi Master</span>
+              <span style="font-size: 12px; color: #6b7280;">Japanese • $$$ • 30-40 min</span>
+            </div>
+            <div style="background-color: #dcfce7; padding: 4px 8px; border-radius: 6px; display: flex; align-items: center; gap: 4px;">
+              <span style="font-size: 12px; color: #16a34a;">★</span>
+              <span style="font-size: 12px; font-weight: 600; color: #16a34a;">4.9</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <div style="display: flex; justify-content: space-around; align-items: center; padding: 12px 24px 28px 24px; background-color: #ffffff; border-top: 1px solid #e5e7eb;">
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 4px;">
+        <span style="font-size: 24px;">🏠</span>
+        <span style="font-size: 10px; font-weight: 600; color: #f97316;">Home</span>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 4px;">
+        <span style="font-size: 24px;">🔍</span>
+        <span style="font-size: 10px; color: #6b7280;">Search</span>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 4px;">
+        <span style="font-size: 24px;">📋</span>
+        <span style="font-size: 10px; color: #6b7280;">Orders</span>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 4px;">
+        <span style="font-size: 24px;">👤</span>
+        <span style="font-size: 10px; color: #6b7280;">Profile</span>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

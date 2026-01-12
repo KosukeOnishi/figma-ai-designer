@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Test 01: Absolute Positioning Stretch</title>
+  <style>
+    body { display: flex; justify-content: center; padding: 40px; background: #e0e0e0; }
+  </style>
+</head>
+<body>
+
+<!--
+  Test: position: absolute with left+right and top+bottom
+  Expected: Blue box should fill parent (380x80) minus 20px on each side = 340x40
+-->
+<div style="width: 380px; height: 80px; background-color: #333333; position: relative;">
+  <div style="position: absolute; left: 20px; right: 20px; top: 20px; bottom: 20px; background-color: #4a90d9; display: flex; justify-content: center; align-items: center;">
+    <span style="color: white; font-size: 14px;">Should be 340 x 40</span>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Test 04: Nested Margins</title>
+  <style>
+    body { display: flex; justify-content: center; padding: 40px; background: #e0e0e0; }
+  </style>
+</head>
+<body>
+
+<!--
+  Test: Nested elements with horizontal margins
+  Expected: Each nested level should have its own margin applied correctly
+  Potential issue: childParentWidth might be undefined causing NaN in calculations
+-->
+<div style="width: 400px; background-color: #333; padding: 20px;">
+  <div style="margin: 0 30px; background-color: #4a90d9; padding: 15px;">
+    <div style="margin: 0 20px; background-color: #d94a4a; padding: 10px;">
+      <span style="color: white; font-size: 14px;">Inner content</span>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
