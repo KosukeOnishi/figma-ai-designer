@@ -198,7 +198,7 @@ Add to `.mcp.json` in your project root:
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/figma-ai-designer.git
+git clone https://github.com/KosukeOnishi/figma-ai-designer.git
 cd figma-ai-designer
 
 # Install dependencies

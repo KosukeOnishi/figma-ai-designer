@@ -26,11 +26,15 @@
     "html",
     "model-context-protocol"
   ],
-  "author": "",
+  "author": "Kosuke Onishi",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/KosukeOnishi/figma-ai-designer.git"
+  },
+  "homepage": "https://github.com/KosukeOnishi/figma-ai-designer#readme",
+  "bugs": {
+    "url": "https://github.com/KosukeOnishi/figma-ai-designer/issues"
   },
   "files": [
     "dist/mcp-server/**/*",
