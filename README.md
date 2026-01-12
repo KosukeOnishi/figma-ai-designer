@@ -153,6 +153,44 @@ Each icon has a "code point" (e.g., `e8b6` for search). Use it like this:
 
 ---
 
+## Image Support
+
+**Images are fully supported!** Both local files and web URLs work seamlessly.
+
+### Local Images
+
+Reference local image files using relative or absolute paths:
+
+```html
+<img src="./assets/logo.png" style="width: 200px; height: 100px;" />
+<img src="/Users/name/images/photo.jpg" style="width: 300px; border-radius: 12px;" />
+```
+
+### Web Images
+
+Images from URLs are automatically downloaded and embedded:
+
+```html
+<img src="https://example.com/image.png" style="width: 400px; height: 300px;" />
+```
+
+### Supported Formats
+
+| Format | Support |
+|--------|---------|
+| PNG | ✅ Native |
+| JPG/JPEG | ✅ Native |
+| GIF | ✅ Native |
+| WebP | ✅ Auto-converted to JPEG |
+
+### Automatic Optimization
+
+- Images larger than **4096x4096** are automatically resized (Figma's limit)
+- Large files (>5MB) are compressed for performance
+- Aspect ratio is preserved during resizing
+
+---
+
 ## Supported HTML & CSS
 
 ### HTML Elements
@@ -163,7 +201,7 @@ Each icon has a "code point" (e.g., `e8b6` for search). Use it like this:
 | `<span>`, `<p>`, `<h1>`-`<h6>`, `<label>` | Text |
 | `<button>` | Frame with Text (styled) |
 | `<input>`, `<textarea>` | Frame with Text (input style) |
-| `<img>` | Rectangle with placeholder |
+| `<img>` | Rectangle with Image Fill |
 
 ### CSS Properties
 

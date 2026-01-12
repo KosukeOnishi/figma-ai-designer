@@ -23,8 +23,8 @@ export async function createComponent(input: CreateComponentInput): Promise<Comp
     );
   }
 
-  // Parse HTML on the server side
-  const elements = parseHTML(input.html);
+  // Parse HTML on the server side (async to support web image downloads)
+  const elements = await parseHTML(input.html);
 
   if (elements.length === 0) {
     throw new Error('No valid HTML elements found in the provided HTML');
