@@ -259,6 +259,13 @@ export interface ParsedElement {
   textContent?: string;
   attributes: Record<string, string>;
   children: ParsedElement[];
+  // Image data for <img> elements (Base64 encoded without data URL prefix)
+  imageData?: string;
+  // Image URL for web images (plugin will load via createImageAsync)
+  imageUrl?: string;
+  // Original image dimensions
+  imageWidth?: number;
+  imageHeight?: number;
 }
 
 // Component creation result

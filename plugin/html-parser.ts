@@ -837,38 +837,57 @@ export async function createFigmaNode(
       }));
     }
 
-    // Enable text wrapping for text tags when parent has a fixed width
-    // BUT: if parent has alignment (CENTER/MAX), keep text at natural width so alignment works
-    // AND: if parent has SPACE_BETWEEN, keep text at natural width so distribution works
-    // AND: if parent is HORIZONTAL layout, keep text at natural width (children should HUG in horizontal flex)
-    // AND: if parent is in HUG mode, keep text at natural width
+    // Enable text wrapping for text tags when parent has a constrained width
+    // Use parentWidth if available, or calculate from actual parent frame dimensions
     const parentFrame = parent as FrameNode;
     const parentHasAlignment = 'counterAxisAlignItems' in parentFrame &&
       (parentFrame.layoutMode === 'VERTICAL' || parentFrame.layoutMode === 'HORIZONTAL') &&
       (parentFrame.counterAxisAlignItems === 'CENTER' || parentFrame.counterAxisAlignItems === 'MAX');
     const parentHasSpaceBetween = 'primaryAxisAlignItems' in parentFrame &&
       parentFrame.primaryAxisAlignItems === 'SPACE_BETWEEN';
-    const parentIsHorizontal = 'layoutMode' in parentFrame && parentFrame.layoutMode === 'HORIZONTAL';
     const parentIsHugging = 'layoutSizingHorizontal' in parentFrame &&
       parentFrame.layoutSizingHorizontal === 'HUG';
+
+    // Calculate effective width for text wrapping
+    // Priority: parentWidth param > parent frame actual width (minus padding)
+    let effectiveTextWidth = parentWidth;
+    if (!effectiveTextWidth && 'width' in parentFrame && parentFrame.width > 50) {
+      // Use parent's actual width minus its padding
+      const parentPadLeft = 'paddingLeft' in parentFrame ? parentFrame.paddingLeft : 0;
+      const parentPadRight = 'paddingRight' in parentFrame ? parentFrame.paddingRight : 0;
+      effectiveTextWidth = parentFrame.width - parentPadLeft - parentPadRight;
+    }
 
     // white-space: nowrap prevents text wrapping
     const noWrap = styles.whiteSpace === 'nowrap' || styles.whiteSpace === 'pre';
     const hasEllipsis = styles.textOverflow === 'ellipsis';
 
-    if (hasEllipsis && parentWidth) {
+    // Check if parent uses flex/fill sizing (will get width from auto-layout)
+    const parentUsesFillSizing = 'layoutSizingHorizontal' in parentFrame &&
+      parentFrame.layoutSizingHorizontal === 'FILL';
+    const parentIsVerticalLayout = 'layoutMode' in parentFrame &&
+      parentFrame.layoutMode === 'VERTICAL';
+
+    if (hasEllipsis && effectiveTextWidth && effectiveTextWidth > 0) {
       // For ellipsis to work, text needs fixed width and NONE or HEIGHT resize mode
       textNode.textAutoResize = 'NONE';
-      textNode.resize(parentWidth, textNode.height);
+      textNode.resize(effectiveTextWidth, textNode.height);
       textNode.textTruncation = 'ENDING';
-    } else if (parentWidth && !parentHasAlignment && !parentHasSpaceBetween && !parentIsHorizontal && !parentIsHugging && !noWrap) {
+    } else if (effectiveTextWidth && effectiveTextWidth > 0 && !parentHasAlignment && !parentHasSpaceBetween && !parentIsHugging && !noWrap) {
       textNode.textAutoResize = 'HEIGHT';
-      textNode.resize(parentWidth, textNode.height);
+      textNode.resize(effectiveTextWidth, textNode.height);
     } else if (noWrap) {
       textNode.textAutoResize = 'WIDTH_AND_HEIGHT';
     }
 
     parent.appendChild(textNode);
+
+    // For text in vertical layouts with fill/flex sizing, make text fill width
+    // This ensures text wraps correctly even when parent width is determined by flexbox
+    if (parentIsVerticalLayout && (parentUsesFillSizing || parentIsHugging === false) && !noWrap) {
+      textNode.layoutSizingHorizontal = 'FILL';
+      textNode.textAutoResize = 'HEIGHT';
+    }
     textNode.name = tagName;
 
     // Apply rotation to text node
@@ -885,6 +904,165 @@ export async function createFigmaNode(
     }
 
     return textNode;
+  }
+
+  // Handle img elements with image data
+  if (tagName === 'img' && element.imageData) {
+    const rect = figma.createRectangle();
+    rect.name = 'img';
+
+    // Decode Base64 to Uint8Array (figma.base64Decode returns Uint8Array directly)
+    const bytes = figma.base64Decode(element.imageData);
+
+    // Create image from bytes
+    const image = figma.createImage(bytes);
+
+    // Set default size (will be overridden by styles if present)
+    let imgWidth = element.imageWidth || 100;
+    let imgHeight = element.imageHeight || 100;
+
+    // Use style dimensions if specified
+    if (typeof styles.width === 'number') imgWidth = styles.width;
+    if (typeof styles.height === 'number') imgHeight = styles.height;
+
+    rect.resize(imgWidth, imgHeight);
+
+    // Apply image as fill (FIT preserves aspect ratio)
+    rect.fills = [{
+      type: 'IMAGE',
+      imageHash: image.hash,
+      scaleMode: 'FIT',
+    }];
+
+    // Apply border radius if specified
+    if (styles.borderRadius !== undefined) {
+      rect.cornerRadius = styles.borderRadius;
+    }
+    if (styles.borderRadiusPercent !== undefined) {
+      const minDimension = Math.min(imgWidth, imgHeight);
+      rect.cornerRadius = (styles.borderRadiusPercent / 100) * minDimension;
+    }
+
+    // Apply opacity
+    if (styles.opacity !== undefined) {
+      rect.opacity = styles.opacity;
+    }
+
+    // Apply box shadow
+    if (styles.boxShadow && styles.boxShadow.length > 0) {
+      rect.effects = styles.boxShadow.map(shadow => ({
+        type: (shadow.inset ? 'INNER_SHADOW' : 'DROP_SHADOW') as 'DROP_SHADOW' | 'INNER_SHADOW',
+        color: {
+          r: shadow.color.r,
+          g: shadow.color.g,
+          b: shadow.color.b,
+          a: shadow.color.a,
+        },
+        offset: { x: shadow.offsetX, y: shadow.offsetY },
+        radius: shadow.blur,
+        spread: shadow.spread,
+        visible: true,
+        blendMode: 'NORMAL' as const,
+      }));
+    }
+
+    parent.appendChild(rect);
+    return rect;
+  }
+
+  // Handle img elements with web URL (use createImageAsync)
+  if (tagName === 'img' && element.imageUrl) {
+    const rect = figma.createRectangle();
+    rect.name = 'img';
+
+    // Set default size (will be overridden by styles if present)
+    let imgWidth = 100;
+    let imgHeight = 100;
+    if (typeof styles.width === 'number') imgWidth = styles.width;
+    if (typeof styles.height === 'number') imgHeight = styles.height;
+
+    rect.resize(imgWidth, imgHeight);
+
+    // Apply border radius if specified
+    if (styles.borderRadius !== undefined) {
+      rect.cornerRadius = styles.borderRadius;
+    }
+    if (styles.borderRadiusPercent !== undefined) {
+      const minDimension = Math.min(imgWidth, imgHeight);
+      rect.cornerRadius = (styles.borderRadiusPercent / 100) * minDimension;
+    }
+
+    // Apply opacity
+    if (styles.opacity !== undefined) {
+      rect.opacity = styles.opacity;
+    }
+
+    // Apply box shadow
+    if (styles.boxShadow && styles.boxShadow.length > 0) {
+      rect.effects = styles.boxShadow.map(shadow => ({
+        type: (shadow.inset ? 'INNER_SHADOW' : 'DROP_SHADOW') as 'DROP_SHADOW' | 'INNER_SHADOW',
+        color: {
+          r: shadow.color.r,
+          g: shadow.color.g,
+          b: shadow.color.b,
+          a: shadow.color.a,
+        },
+        offset: { x: shadow.offsetX, y: shadow.offsetY },
+        radius: shadow.blur,
+        spread: shadow.spread,
+        visible: true,
+        blendMode: 'NORMAL' as const,
+      }));
+    }
+
+    parent.appendChild(rect);
+
+    // Load image from URL asynchronously
+    // Note: This happens after the rect is added to parent
+    figma.createImageAsync(element.imageUrl).then(image => {
+      rect.fills = [{
+        type: 'IMAGE',
+        imageHash: image.hash,
+        scaleMode: 'FILL',
+      }];
+    }).catch(err => {
+      console.warn('Failed to load image from URL:', err);
+      // Keep gray placeholder on error
+      rect.fills = [{
+        type: 'SOLID',
+        color: { r: 0.9, g: 0.9, b: 0.9 },
+      }];
+    });
+
+    return rect;
+  }
+
+  // Handle img elements without image data or URL (placeholder)
+  if (tagName === 'img' && !element.imageData && !element.imageUrl) {
+    const rect = figma.createRectangle();
+    rect.name = 'img (placeholder)';
+
+    // Use style dimensions or defaults
+    let imgWidth = 100;
+    let imgHeight = 100;
+    if (typeof styles.width === 'number') imgWidth = styles.width;
+    if (typeof styles.height === 'number') imgHeight = styles.height;
+
+    rect.resize(imgWidth, imgHeight);
+
+    // Gray placeholder fill
+    rect.fills = [{
+      type: 'SOLID',
+      color: { r: 0.9, g: 0.9, b: 0.9 },
+    }];
+
+    // Apply border radius if specified
+    if (styles.borderRadius !== undefined) {
+      rect.cornerRadius = styles.borderRadius;
+    }
+
+    parent.appendChild(rect);
+    return rect;
   }
 
   // Frame elements (div, section, button, etc.)
@@ -1277,7 +1455,7 @@ export async function createFigmaNode(
       textNode.textAlignHorizontal = alignMap[styles.textAlign] || 'LEFT';
     }
 
-    // Text wrapping: if frame has a fixed width, allow text to wrap
+    // Text wrapping: if frame has a constrained width, allow text to wrap
     // Otherwise, let text expand horizontally
     // Inline tags (span, a, etc.) should NOT wrap text - they hug content
     // white-space: nowrap prevents text wrapping
@@ -1285,18 +1463,25 @@ export async function createFigmaNode(
     const frameHasFixedWidth = typeof styles.width === 'number';
     const frameNoWrap = styles.whiteSpace === 'nowrap' || styles.whiteSpace === 'pre';
     const frameHasEllipsis = styles.textOverflow === 'ellipsis';
+    // Also check if frame has actual width from flex or parent constraints
+    const frameHasConstrainedWidth = frameHasFixedWidth ||
+      (frame.width > 50 && (styles.flexGrow !== undefined || frame.layoutSizingHorizontal === 'FILL'));
 
     // Calculate available width inside the frame (accounting for padding)
     const paddingLeft = styles.paddingLeft ?? styles.padding ?? 0;
     const paddingRight = styles.paddingRight ?? styles.padding ?? 0;
     const availableWidth = frame.width - paddingLeft - paddingRight;
 
-    if (frameHasEllipsis && frameHasFixedWidth && availableWidth > 0) {
+    // Check if frame uses flex/fill sizing
+    const frameUsesFillSizing = frame.layoutSizingHorizontal === 'FILL';
+    const frameIsVerticalLayout = frame.layoutMode === 'VERTICAL';
+
+    if (frameHasEllipsis && frameHasConstrainedWidth && availableWidth > 0) {
       // For ellipsis to work, text needs fixed width and NONE resize mode
       textNode.textAutoResize = 'NONE';
       textNode.resize(availableWidth, textNode.height);
       textNode.textTruncation = 'ENDING';
-    } else if (frameHasFixedWidth && !frameIsInlineTag && !frameNoWrap) {
+    } else if (frameHasConstrainedWidth && !frameIsInlineTag && !frameNoWrap) {
       textNode.textAutoResize = 'HEIGHT';
       if (availableWidth > 0) {
         textNode.resize(availableWidth, textNode.height);
@@ -1307,6 +1492,13 @@ export async function createFigmaNode(
 
     frame.appendChild(textNode);
     textNode.name = 'text';
+
+    // For text in vertical layouts with fill/flex sizing, make text fill width
+    // This ensures text wraps correctly even when frame width is determined by flexbox
+    if (frameIsVerticalLayout && (frameUsesFillSizing || styles.flexGrow !== undefined) && !frameNoWrap && !frameIsInlineTag) {
+      textNode.layoutSizingHorizontal = 'FILL';
+      textNode.textAutoResize = 'HEIGHT';
+    }
 
     // For text-align: center, also center the text within the frame
     if (styles.textAlign === 'center') {

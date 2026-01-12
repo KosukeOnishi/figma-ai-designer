@@ -4,7 +4,187 @@
  */
 
 import { parse, HTMLElement, TextNode } from 'node-html-parser';
+import * as fs from 'fs';
+import * as path from 'path';
+import * as https from 'https';
+import * as http from 'http';
+import sharp from 'sharp';
 import type { ParsedStyle, ParsedElement, RGBA, BoxShadow, LinearGradient, RadialGradient, GradientStop } from '../shared/types';
+
+// Figma max image dimension (4096x4096)
+const MAX_IMAGE_DIMENSION = 4096;
+// Max file size for reasonable performance (5MB)
+const MAX_IMAGE_SIZE_BYTES = 5 * 1024 * 1024;
+
+// Resize and compress image if needed, returns Base64 string
+async function processImage(buffer: Buffer, sourceName: string): Promise<string | null> {
+  try {
+    const image = sharp(buffer);
+    const metadata = await image.metadata();
+
+    const width = metadata.width || 0;
+    const height = metadata.height || 0;
+    const format = metadata.format;
+
+    // Check if format is supported by Figma
+    if (format === 'webp') {
+      console.warn(`WebP format is not supported by Figma, converting to JPEG`);
+    }
+
+    // Check if resize is needed
+    const needsResize = width > MAX_IMAGE_DIMENSION || height > MAX_IMAGE_DIMENSION || buffer.length > MAX_IMAGE_SIZE_BYTES;
+
+    if (needsResize) {
+      console.log(`Resizing image: ${width}x${height} (${Math.round(buffer.length / 1024)}KB) -> max ${MAX_IMAGE_DIMENSION}px`);
+
+      // Calculate new dimensions maintaining aspect ratio
+      let newWidth = width;
+      let newHeight = height;
+
+      if (width > MAX_IMAGE_DIMENSION || height > MAX_IMAGE_DIMENSION) {
+        const scale = Math.min(MAX_IMAGE_DIMENSION / width, MAX_IMAGE_DIMENSION / height);
+        newWidth = Math.round(width * scale);
+        newHeight = Math.round(height * scale);
+      }
+
+      // Resize and convert to JPEG for smaller size
+      const processedBuffer = await image
+        .resize(newWidth, newHeight, { fit: 'inside', withoutEnlargement: true })
+        .jpeg({ quality: 85 })
+        .toBuffer();
+
+      console.log(`Processed image: ${sourceName} -> ${newWidth}x${newHeight} (${Math.round(processedBuffer.length / 1024)}KB)`);
+      return processedBuffer.toString('base64');
+    }
+
+    // Convert WebP to JPEG even if size is ok
+    if (format === 'webp') {
+      const convertedBuffer = await image.jpeg({ quality: 90 }).toBuffer();
+      console.log(`Converted WebP to JPEG: ${sourceName} (${Math.round(convertedBuffer.length / 1024)}KB)`);
+      return convertedBuffer.toString('base64');
+    }
+
+    // Return original if no processing needed
+    return buffer.toString('base64');
+  } catch (error) {
+    console.warn(`Failed to process image: ${sourceName}`, error instanceof Error ? error.message : '');
+    return null;
+  }
+}
+
+// Load image file and convert to Base64 (with automatic resizing)
+// Returns { data, width, height } or null if failed
+async function loadImageAsBase64(src: string, basePath?: string): Promise<{ data: string; width?: number; height?: number } | null> {
+  try {
+    let imagePath = src;
+
+    // Handle relative paths
+    if (!path.isAbsolute(src) && basePath) {
+      imagePath = path.resolve(basePath, src);
+    } else if (!path.isAbsolute(src)) {
+      // Try resolving from current working directory
+      imagePath = path.resolve(process.cwd(), src);
+    }
+
+    // Check if file exists
+    if (!fs.existsSync(imagePath)) {
+      console.warn(`Image file not found: ${imagePath}`);
+      return null;
+    }
+
+    // Check file extension (now also supports webp since we convert it)
+    const ext = path.extname(imagePath).toLowerCase();
+    if (!['.png', '.jpg', '.jpeg', '.gif', '.webp'].includes(ext)) {
+      console.warn(`Unsupported image format: ${ext}`);
+      return null;
+    }
+
+    // Read file and process (resize/compress if needed)
+    const fileBuffer = fs.readFileSync(imagePath);
+    const base64Data = await processImage(fileBuffer, path.basename(imagePath));
+
+    if (!base64Data) {
+      return null;
+    }
+
+    return { data: base64Data };
+  } catch (error) {
+    console.warn(`Failed to load image: ${src}`, error instanceof Error ? error.message : '');
+    return null;
+  }
+}
+
+// Download web image and convert to Base64 (with automatic resizing/conversion)
+// Returns { data } or null if failed
+async function downloadImageAsBase64(url: string): Promise<{ data: string } | null> {
+  return new Promise((resolve) => {
+    try {
+      const protocol = url.startsWith('https://') ? https : http;
+
+      const request = protocol.get(url, {
+        timeout: 30000, // 30 seconds for large images
+        headers: {
+          'User-Agent': 'Mozilla/5.0 (compatible; FigmaAIDesigner/1.0)',
+          'Accept': 'image/*',
+        }
+      }, (response) => {
+        // Handle redirects
+        if (response.statusCode && response.statusCode >= 300 && response.statusCode < 400 && response.headers.location) {
+          console.log(`Redirecting to: ${response.headers.location}`);
+          downloadImageAsBase64(response.headers.location).then(resolve);
+          return;
+        }
+
+        if (response.statusCode !== 200) {
+          console.warn(`Failed to download image: HTTP ${response.statusCode}`);
+          resolve(null);
+          return;
+        }
+
+        // Check content type
+        const contentType = response.headers['content-type'] || '';
+        if (!contentType.startsWith('image/')) {
+          console.warn(`Invalid content type: ${contentType}`);
+          resolve(null);
+          return;
+        }
+
+        const chunks: Buffer[] = [];
+        response.on('data', (chunk: Buffer) => chunks.push(chunk));
+        response.on('end', async () => {
+          const buffer = Buffer.concat(chunks);
+          console.log(`Downloaded image: ${url.substring(0, 60)}... (${Math.round(buffer.length / 1024)}KB)`);
+
+          // Process image (resize/convert if needed)
+          const base64Data = await processImage(buffer, url.substring(0, 60));
+          if (base64Data) {
+            resolve({ data: base64Data });
+          } else {
+            resolve(null);
+          }
+        });
+        response.on('error', (err) => {
+          console.warn(`Error reading response: ${err.message}`);
+          resolve(null);
+        });
+      });
+
+      request.on('error', (err) => {
+        console.warn(`Failed to download image: ${err.message}`);
+        resolve(null);
+      });
+
+      request.on('timeout', () => {
+        console.warn(`Image download timed out: ${url}`);
+        request.destroy();
+        resolve(null);
+      });
+    } catch (error) {
+      console.warn(`Failed to download image: ${url}`, error instanceof Error ? error.message : '');
+      resolve(null);
+    }
+  });
+}
 
 // Helper to convert HSL to RGB
 function hslToRgb(h: number, s: number, l: number): { r: number; g: number; b: number } {
@@ -1101,8 +1281,8 @@ function parseInlineStyle(styleStr: string): ParsedStyle {
   return style;
 }
 
-// Parse element using node-html-parser
-function parseElement(element: HTMLElement): ParsedElement {
+// Parse element using node-html-parser (async for web image support)
+async function parseElement(element: HTMLElement, basePath?: string): Promise<ParsedElement> {
   const tagName = element.tagName?.toLowerCase() || 'div';
   const styleAttr = element.getAttribute('style') || '';
   const styles = parseInlineStyle(styleAttr);
@@ -1126,25 +1306,73 @@ function parseElement(element: HTMLElement): ParsedElement {
     }
   }
 
-  // Parse children (only HTMLElements, not text nodes)
+  // Parse children (only HTMLElements, not text nodes) - async
   const children: ParsedElement[] = [];
   for (const child of element.childNodes) {
     if (child instanceof HTMLElement) {
-      children.push(parseElement(child));
+      children.push(await parseElement(child, basePath));
     }
   }
 
-  return {
+  // Handle img elements - load image as Base64 (local or downloaded)
+  let imageData: string | undefined;
+  let imageWidth: number | undefined;
+  let imageHeight: number | undefined;
+
+  if (tagName === 'img') {
+    const src = element.getAttribute('src');
+    if (src) {
+      if (src.startsWith('http://') || src.startsWith('https://')) {
+        // Web URL - download and convert to Base64
+        console.log(`Downloading web image: ${src.substring(0, 80)}...`);
+        const downloadResult = await downloadImageAsBase64(src);
+        if (downloadResult) {
+          imageData = downloadResult.data;
+        }
+      } else if (!src.startsWith('data:')) {
+        // Local file path - load and convert to Base64
+        const imageResult = await loadImageAsBase64(src, basePath);
+        if (imageResult) {
+          imageData = imageResult.data;
+          imageWidth = imageResult.width;
+          imageHeight = imageResult.height;
+        }
+      }
+    }
+    // Parse width/height from attributes if present
+    const attrWidth = element.getAttribute('width');
+    const attrHeight = element.getAttribute('height');
+    if (attrWidth) {
+      const w = parseInt(attrWidth, 10);
+      if (!isNaN(w)) styles.width = w;
+    }
+    if (attrHeight) {
+      const h = parseInt(attrHeight, 10);
+      if (!isNaN(h)) styles.height = h;
+    }
+  }
+
+  const result: ParsedElement = {
     tagName,
     styles,
     textContent,
     attributes,
     children,
   };
+
+  // Only add image fields if they have values (avoid sending undefined fields)
+  if (imageData) {
+    result.imageData = imageData;
+    if (imageWidth) result.imageWidth = imageWidth;
+    if (imageHeight) result.imageHeight = imageHeight;
+  }
+
+  return result;
 }
 
-// Parse HTML string to ParsedElement array
-export function parseHTML(html: string): ParsedElement[] {
+// Parse HTML string to ParsedElement array (async for web image support)
+// basePath: Optional directory path for resolving relative image paths
+export async function parseHTML(html: string, basePath?: string): Promise<ParsedElement[]> {
   const root = parse(html, {
     lowerCaseTagName: true,
     comment: false,
@@ -1160,11 +1388,11 @@ export function parseHTML(html: string): ParsedElement[] {
         // Process children of these wrapper tags
         for (const innerChild of child.childNodes) {
           if (innerChild instanceof HTMLElement) {
-            elements.push(parseElement(innerChild));
+            elements.push(await parseElement(innerChild, basePath));
           }
         }
       } else {
-        elements.push(parseElement(child));
+        elements.push(await parseElement(child, basePath));
       }
     }
   }
