@@ -1,6 +1,6 @@
 {
   "name": "figma-ai-designer",
-  "id": "1592071865352736129",
+  "id": "1592573139477373341",
   "api": "1.0.0",
   "main": "dist/plugin/code.js",
   "ui": "plugin/ui.html",
